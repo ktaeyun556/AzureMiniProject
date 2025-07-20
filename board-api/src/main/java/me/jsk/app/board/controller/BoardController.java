@@ -20,7 +20,6 @@ import me.jsk.app.board.domain.BoardVO;
 import me.jsk.app.board.domain.ReplyVO;
 import me.jsk.app.board.service.BoardService;
 
-@CrossOrigin
 @Controller
 @EnableAutoConfiguration
 @RequestMapping("/board")
