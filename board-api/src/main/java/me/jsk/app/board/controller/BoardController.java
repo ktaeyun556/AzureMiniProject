@@ -20,7 +20,7 @@ import me.jsk.app.board.domain.BoardVO;
 import me.jsk.app.board.domain.ReplyVO;
 import me.jsk.app.board.service.BoardService;
 
-@Controller
+@RestController
 @EnableAutoConfiguration
 @RequestMapping("/board")
 @CrossOrigin(origins = "https://kind-glacier-0f7ba5b00.2.azurestaticapps.net")
