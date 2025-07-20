@@ -24,6 +24,7 @@ import me.jsk.app.board.service.BoardService;
 @Controller
 @EnableAutoConfiguration
 @RequestMapping("/board")
+@CrossOrigin(origins = "https://kind-glacier-0f7ba5b00.2.azurestaticapps.net")
 public class BoardController {
 
   @Autowired
