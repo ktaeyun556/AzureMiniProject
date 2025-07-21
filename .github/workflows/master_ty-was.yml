@@ -22,18 +22,16 @@ jobs:
         uses: actions/setup-java@v4
         with:
           java-version: '8'
-          #distribution: 'microsoft'
-          distribution: 'temurin'
+          distribution: 'microsoft'
 
       - name: Build with Maven
         run: mvn clean install
-        working-directory: ./board-api
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
           name: java-app
-          path: '${{ github.workspace }}/board-api/target/*.war'
+          path: '${{ github.workspace }}/target/*.war'
 
   deploy:
     runs-on: ubuntu-latest
@@ -44,7 +42,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: java-app
-
+      
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
@@ -52,4 +50,4 @@ jobs:
           app-name: 'ty-was'
           slot-name: 'Production'
           package: '*.war'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_298BB9D6E286437F8A9EBB9B26B77358 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_D38F88F4A6274761B0C57B65E0FCEDB6 }}
