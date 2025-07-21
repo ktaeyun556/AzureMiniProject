@@ -21,10 +21,11 @@ import me.jsk.app.board.domain.BoardVO;
 import me.jsk.app.board.domain.ReplyVO;
 import me.jsk.app.board.service.BoardService;
 
-@RestController
+@CrossOrigin
+@Controller
 @EnableAutoConfiguration
 @RequestMapping("/board")
-@CrossOrigin(origins = "https://yellow-hill-0e278b900.1.azurestaticapps.net")
+//@CrossOrigin(origins = "https://yellow-hill-0e278b900.1.azurestaticapps.net")
 public class BoardController {
 
   @Autowired
@@ -276,5 +277,19 @@ public class BoardController {
     return "Alive";
   }
 
-
+  /**
+   * DB 연결 확인
+   * @return
+   * @throws Exception
+   */
+  @ResponseBody
+  @GetMapping(value = "/health/db")
+  public String checkDbConnection() throws Exception {
+    try (java.sql.Connection conn = dataSource.getConnection()) {
+      return "✅ DB 연결 성공";
+    } catch (Exception e) {
+      e.printStackTrace();
+      return "❌ DB 연결 실패: " + e.getMessage();
+    }
+  }
 }
