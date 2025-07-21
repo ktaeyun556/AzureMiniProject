@@ -25,7 +25,7 @@ import me.jsk.app.board.service.BoardService;
 //@CrossOrigin(origins = "https://yellow-hill-0e278b900.1.azurestaticapps.net")
 @CrossOrigin
 @Controller
-//@EnableAutoConfiguration
+@EnableAutoConfiguration
 @RequestMapping("/board")
 public class BoardController {
 
