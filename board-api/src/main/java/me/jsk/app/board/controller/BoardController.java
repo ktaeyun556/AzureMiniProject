@@ -21,12 +21,12 @@ import me.jsk.app.board.domain.BoardVO;
 import me.jsk.app.board.domain.ReplyVO;
 import me.jsk.app.board.service.BoardService;
 
-//@CrossOrigin
-//@Controller
-@RestController
-@EnableAutoConfiguration
+//@RestController
+//@CrossOrigin(origins = "https://yellow-hill-0e278b900.1.azurestaticapps.net")
+@CrossOrigin
+@Controller
+//@EnableAutoConfiguration
 @RequestMapping("/board")
-@CrossOrigin(origins = "https://yellow-hill-0e278b900.1.azurestaticapps.net")
 public class BoardController {
 
   @Autowired
