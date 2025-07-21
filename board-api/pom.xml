@@ -11,7 +11,6 @@
 	<groupId>me.jsk</groupId>
 	<artifactId>app</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging> 
 
 	<name>app-board</name>
 	<description>App Board for Spring Boot</description>
