@@ -30,6 +30,9 @@ public class BoardController {
 
   @Autowired
   private BoardService boardService;
+
+  @Autowired
+  private javax.sql.DataSource dataSource;
   
   /**
    * 게시글 목록 조회
