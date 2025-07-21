@@ -24,7 +24,7 @@ import me.jsk.app.board.service.BoardService;
 @RestController
 @EnableAutoConfiguration
 @RequestMapping("/board")
-@CrossOrigin(origins = "https://gray-smoke-04ab4fd00.1.azurestaticapps.net")
+@CrossOrigin(origins = "https://yellow-hill-0e278b900.1.azurestaticapps.net")
 public class BoardController {
 
   @Autowired
@@ -275,5 +275,6 @@ public class BoardController {
   public String alieveCheck()  throws Exception{
     return "Alive";
   }
-  
+
+
 }
