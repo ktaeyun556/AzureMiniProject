@@ -9,6 +9,7 @@ on:
       - master
     paths:
       - 'board-api/**'
+      - '.github/workflows/master_sub3-was.yml' 
 
 jobs:
   build:
