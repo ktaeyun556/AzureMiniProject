@@ -7,7 +7,7 @@ on:
       - 'board-api/**'
       - '.github/workflows/sub3-2-was-oidc.yml'
 
-# OIDC 인증을 위해 id-token 권한이 반드시 필요합니다.
+# OIDC 인증을 위해 id-token 권한이 반드시 필요
 permissions:
   id-token: write
   contents: read
