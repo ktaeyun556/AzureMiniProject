@@ -27,6 +27,7 @@ jobs:
           client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_1E3A6091687E4518A44AFCA40EFF99FC }}
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_0ADB1F0A0D2C4BEDBA3E492888928E05 }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_6D4AA726263A470C852CA345C8C406A5 }}
+          allow-no-subscriptions: true
 
       # 2. ACR 로그인
       - name: Docker Login to ACR
