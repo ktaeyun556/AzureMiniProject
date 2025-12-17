@@ -42,6 +42,4 @@ jobs:
         with:
           context: ./board-api
           push: true
-          tags:
-            - ${{ secrets.ACR_NAME }}/wasOIDC:${{ github.sha }}
-            - ${{ secrets.ACR_NAME }}/wasOIDC:latest
+          tags: ${{ secrets.ACR_NAME }}/wasOIDC:${{ github.sha }}, ${{ secrets.ACR_NAME }}/wasOIDC:latest
