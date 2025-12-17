@@ -6,7 +6,7 @@ COPY pom.xml .
 RUN mvn -f pom.xml clean package
 
 # 2: 빌드된 jar 파일을 가져와 컨테이너 이미지 생성
-FROM openjdk:8-jdk-alpine
+FROM eclipse-temurin:8-jdk-alpine
 VOLUME /tmp
 ARG JAR_FILE=/app/target/*.jar
 COPY --from=build ${JAR_FILE} app.jar
