@@ -35,3 +35,13 @@ jobs:
           registry: ${{ secrets.ACR_NAME }}
           username: ${{ secrets.AZURE_CLIENT_ID }}
           password: ${{ secrets.AZURE_CLIENT_SECRET_FOR_ACR_LOGIN }}
+      
+      # 이미지 빌드 후 ACR 푸쉬
+      - name: Build and Push Image
+        uses: docker/build-push-action@v6
+        with:
+          context: ./board-api
+          push: true
+          tags:
+            - ${{ secrets.ACR_NAME }}/wasOIDC:${{ github.sha }}
+            - ${{ secrets.ACR_NAME }}/wasOIDC:latest
