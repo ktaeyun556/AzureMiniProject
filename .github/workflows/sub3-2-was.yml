@@ -1,0 +1,43 @@
+name: Container Image Build and Push to ACR - sub3-2-was
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - 'board-api/**'
+      - '.github/workflows/sub3-2-was.yml'
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 1. Azure 로그인 (OIDC 방식)
+      - name: Azure Login
+        uses: azure/login@v2
+        id: azure-login
+        with:
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_1E3A6091687E4518A44AFCA40EFF99FC }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_0ADB1F0A0D2C4BEDBA3E492888928E05 }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_6D4AA726263A470C852CA345C8C406A5 }}
+
+      # 2. ACR 로그인
+      - name: Docker Login to ACR
+        uses: azure/docker-login@v2
+        with:
+          login-server: ${{ secrets.ACR_NAME }}.azurecr.io
+          username: ${{ secrets.AZUREAPPSERVICE_CLIENTID_1E3A6091687E4518A44AFCA40EFF99FC }}
+          password: ${{ steps.azure-login.outputs.access_token }}
+
+      # 3. Docker 이미지 빌드 및 푸시
+      - name: Build and Push Image
+        run: |
+          docker build -f ./board-api/Dockerfile -t ${{ secrets.ACR_NAME }}.azurecr.io/was:${{ github.sha }}
+          docker push ${{ secrets.ACR_NAME }}.azurecr.io/was:${{ github.sha }}
