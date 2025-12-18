@@ -2,7 +2,8 @@ name: OIDC Azure Login
 
 on:
   push:
-    branches: [ "master" ]
+    branches:
+      - master
     paths:
       - 'board-api/**'
       - '.github/workflows/sub3-2-was-oidc.yml'
