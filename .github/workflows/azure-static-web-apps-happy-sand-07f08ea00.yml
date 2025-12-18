@@ -6,7 +6,7 @@ on:
       - master
     paths:
       - 'board-app/**'
-      - '.github/workflows/sub3-web.yml' 
+      - '.github/workflows/azure-static-web-apps-happy-sand-07f08ea00.yml' 
 
 jobs:
   build_and_deploy_job:
