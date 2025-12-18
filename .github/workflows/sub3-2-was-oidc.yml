@@ -44,3 +44,10 @@ jobs:
           context: ./board-api
           push: true
           tags: ${{ secrets.ACR_NAME }}/wasoidc:${{ github.sha }}, ${{ secrets.ACR_NAME }}/wasoidc:latest
+      
+      # App Service에 컨테이너 배포
+      - name: Deploy to Azure App Service
+        uses: azure/webapps-deploy@v3
+        with:
+          app-name: 'sub32-was'
+          images: ${{ secrets.ACR_NAME }}/wasoidc:${{ github.sha }}
