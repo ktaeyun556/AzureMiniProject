@@ -33,8 +33,8 @@ jobs:
         uses: docker/login-action@v3
         with:
           registry: ${{ secrets.ACR_NAME_SUB4 }}
-          username: ${{ secrets.AZURE_CLIENT_ID }}
-          password: ${{ secrets.AZURE_CLIENT_SECRET_FOR_ACR_LOGIN }}
+          username: ${{ secrets.AZURE_CLIENT_ID_SUB4 }}
+          password: ${{ secrets.AZURE_CLIENT_SECRET_FOR_ACR_LOGIN_SUB4 }}
       
       # 이미지 빌드 후 ACR 푸쉬
       - name: Build and Push Image
