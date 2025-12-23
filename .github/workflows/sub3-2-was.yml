@@ -1,4 +1,4 @@
-name: Container Image Build and Push to ACR - sub3-2-was
+name: WAS Image Build and Push to ACR(Subject 3-2)
 
 on:
   push:
