@@ -1,4 +1,4 @@
-name: OIDC Azure Login
+name: WAS Image Build and Push to ACR and Deploy to App Service(Subject 3-2)
 
 on:
   push:
