@@ -1,0 +1,47 @@
+# 1. Deployment: Spring 앱 컨테이너의 개수와 이미지 정의
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spring-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: spring-app
+  template:
+    metadata:
+      labels:
+        app: spring-app
+    spec:
+      containers:
+      - name: spring-app
+        image: acrsub4-bubtbqdweydbd8dz.azurecr.io/was:latest  # 업로드한 ACR 이미지 경로
+        ports:
+        - containerPort: 8080
+        env:
+        - name: SPRING_DATASOURCE_URL
+          value: "jdbc:mysql://sub4-mysql.mysql.database.azure.com:3306/board"
+        - name: SPRING_DATASOURCE_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret
+              key: username
+        - name: SPRING_DATASOURCE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret
+              key: password
+---
+# 2. Service: 외부 로드밸런서를 통해 인터넷에 노출
+apiVersion: v1
+kind: Service
+metadata:
+  name: spring-app-service
+spec:
+  type: LoadBalancer  # 퍼블릭 IP를 할당받기 위한 설정
+  selector:
+    app: spring-app
+  ports:
+    - protocol: TCP
+      port: 8080       # 외부에서 접속할 포트
+      targetPort: 8080 # 파드 내부로 전달할 포트
