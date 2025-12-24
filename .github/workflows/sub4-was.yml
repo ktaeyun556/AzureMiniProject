@@ -48,6 +48,7 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: ./board-api
+          file: ./board-api/DockerfileARM
           push: true
           platforms: linux/arm64
           tags: ${{ secrets.ACR_NAME_SUB4 }}/was:${{ github.sha }}, ${{ secrets.ACR_NAME_SUB4 }}/was:latest

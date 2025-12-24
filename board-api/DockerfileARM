@@ -1,0 +1,19 @@
+# 1단계: Maven 빌드 (ARM64 지원 베이스 이미지 사용)
+FROM maven:3.8.6-amazoncorretto-8 AS build
+WORKDIR /app
+COPY src ./src
+COPY pom.xml .
+RUN mvn -f pom.xml clean package -DskipTests
+
+# 2단계: 실행 (ARM64 지원 베이스 이미지 사용)
+# alpine 대신 amazoncorretto를 사용하여 arm64 호환성 확보
+FROM amazoncorretto:8-alpine-jre
+VOLUME /tmp
+ARG JAR_FILE=/app/target/*.jar
+COPY --from=build ${JAR_FILE} app.jar
+
+# 포트 설정
+EXPOSE 8090
+
+# 최적화된 실행 옵션
+ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
