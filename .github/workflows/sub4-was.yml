@@ -36,6 +36,10 @@ jobs:
           username: ${{ secrets.AZURE_CLIENT_ID }}
           password: ${{ secrets.AZURE_CLIENT_SECRET_FOR_ACR_LOGIN_SUB4 }}
       
+      # buildx 설정
+      - name: Set up Docker buildx
+        uses: docker/setup-buildx-action@v3
+      
       # 이미지 빌드 후 ACR 푸쉬
       - name: Build and Push Image
         uses: docker/build-push-action@v6
