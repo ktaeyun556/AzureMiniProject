@@ -49,5 +49,5 @@ jobs:
         with:
           context: ./board-api
           push: true
-          platforms: linux/amd64 # x86_64 기반 아키텍처 빌드
+          platforms: linux/arm64
           tags: ${{ secrets.ACR_NAME_SUB4 }}/was:${{ github.sha }}, ${{ secrets.ACR_NAME_SUB4 }}/was:latest
