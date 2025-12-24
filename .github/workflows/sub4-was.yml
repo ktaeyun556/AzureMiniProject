@@ -37,8 +37,8 @@ jobs:
           password: ${{ secrets.AZURE_CLIENT_SECRET_FOR_ACR_LOGIN_SUB4 }}
       
       # buildx 설정
-      - name: Set up Docker buildx
-        uses: docker/setup-buildx-action@v3
+      #- name: Set up Docker buildx
+      #  uses: docker/setup-buildx-action@v3
       
       # 이미지 빌드 후 ACR 푸쉬
       - name: Build and Push Image
@@ -46,5 +46,5 @@ jobs:
         with:
           context: ./board-api
           push: true
-          platform: linux/amd64 # x86_64 기반 아키텍처 빌드
+      #    platform: linux/amd64 # x86_64 기반 아키텍처 빌드
           tags: ${{ secrets.ACR_NAME_SUB4 }}/was:${{ github.sha }}, ${{ secrets.ACR_NAME_SUB4 }}/was:latest
