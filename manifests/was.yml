@@ -45,7 +45,3 @@ spec:
     - protocol: TCP
       port: 8090 # 외부에서 접속할 포트
       targetPort: 8090 # 파드 내부로 전달할 포트
-  template:
-    spec:
-      containers:
-        - image: acrsub4-bubtbqdweydbd8dz.azurecr.io/was:f9803e224916fcd3d8c607f74044bb3047c8bc5d
