@@ -52,3 +52,16 @@ jobs:
           push: true
           platforms: linux/arm64
           tags: ${{ secrets.ACR_NAME_SUB4 }}/was:${{ github.sha }}, ${{ secrets.ACR_NAME_SUB4 }}/was:latest
+      
+      # k8s WAS 매니페스트 이미지 태그 수정
+      - name: Update K8s WAS image tag
+        run: |
+          # 현재 커밋 sha로 수정
+          yq -i '.spec.template.spec.containers[0].image = "${{ secrets.ACR_NAME_SUB4 }}/was:${{ github.sha }}"' manifests/was.yml
+      
+      # 커밋 후 푸쉬
+      - name: Commit and Push Changes
+        run: |
+          git add manifests/was.yml
+          git commit -m "update was image tag"
+          git push origin master
