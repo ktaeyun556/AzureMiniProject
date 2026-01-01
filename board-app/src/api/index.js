@@ -2,9 +2,7 @@ import axios from 'axios'
 
 const instance = axios.create({
 	baseURL:
-		// 'https://sub3-was-g3dzdvedfmfqhaf2.koreacentral-01.azurewebsites.net', // sub3-was
-		// 'https://sub32-was-hrg0f5b4hbarhpdh.koreacentral-01.azurewebsites.net', //  sub32-was
-		'http://4.217.133.0:8090',
+		'http://4.230.107.50',
 })
 
 instance.defaults.headers.post['Content-Type'] =
