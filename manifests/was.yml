@@ -31,6 +31,10 @@ spec:
                 secretKeyRef:
                   name: mysql-secret
                   key: password
+          readinessProbe:
+            httpGet:
+              path: /alive
+              port: 8090
 ---
 # 2. Service: ClusterIP로 클러스터 내부 파드로 라우팅
 apiVersion: v1
