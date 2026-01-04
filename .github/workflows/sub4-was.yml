@@ -20,13 +20,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # Azure 로그인 (OIDC 방식 - EntraID OIDC 페더레이션 자격증명 설정 필요)
+      # Azure 로그인 (OIDC 방식 - EntraID 앱 등록 후 OIDC 페더레이션 자격증명 설정 필요)
       - name: Azure Login
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZURE_CLIENT_ID }} # Entra ID 앱 등록 클라이언트ID
+          client-id: ${{ secrets.AZURE_CLIENT_ID }} # 등록된 앱의 클라이언트ID
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
-          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }} # 앱에 구독에 대한 reader 역할 추가 필요
 
       # ACR 로그인
       - name: Login to ACR
@@ -34,7 +34,7 @@ jobs:
         with:
           registry: ${{ secrets.ACR_NAME_SUB4 }}
           username: ${{ secrets.AZURE_CLIENT_ID }}
-          password: ${{ secrets.AZURE_CLIENT_SECRET_FOR_ACR_LOGIN_SUB4 }}
+          password: ${{ secrets.AZURE_CLIENT_SECRET_FOR_ACR_LOGIN_SUB4 }} # 앱에 ACR 로그인에 사용할 토큰 필요(클라이언트 시크릿)
       
       # 이미지 빌드 환경 준비
       - name: Set up QEMU
@@ -43,7 +43,7 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
       
-      # 이미지 빌드 후 ACR 푸쉬
+      # 이미지 빌드 후 ACR 푸쉬(앱에 ACR에 대한 AcrPush 역할 필요)
       - name: Build and Push Image
         uses: docker/build-push-action@v6
         with:
