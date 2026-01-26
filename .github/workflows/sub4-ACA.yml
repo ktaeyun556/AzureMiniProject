@@ -11,7 +11,11 @@ on:
 # OIDC 인증을 위해 id-token 권한이 반드시 필요
 permissions:
   id-token: write
-  contents: write
+  contents: read
+
+env:
+  RESOURCE_GROUP: "sub4-aca"
+  ACA_NAME: "ca-sub4-aca"
 
 jobs:
   login-and-deploy:
@@ -52,17 +56,11 @@ jobs:
           push: true
           tags: ${{ secrets.ACR_NAME }}/was:${{ github.sha }}, ${{ secrets.ACR_NAME }}/was:latest
       
-      # k8s WAS 매니페스트 이미지 태그 수정
-      - name: Update K8s WAS image tag
-        run: |
-          # 현재 커밋 sha로 수정
-          yq -i 'select(.kind == "Deployment" and .metadata.name == "spring-app").spec.template.spec.containers[0].image = "${{ secrets.ACR_NAME }}/was:${{ github.sha }}"' manifests/was.yml
-      
-      # 커밋 후 푸쉬
-      - name: Commit and Push Changes
-        run: |
-          git config user.email "ktaeyun556@gmail.com"
-          git config user.name "ktaeyun556"
-          git add manifests/was.yml
-          git commit -m "update was image tag"
-          git push origin master
+      # ACR 컨테이너 이미지를 사용해 컨테이너 앱 배포
+      - name: Deploy to Container Apps
+        uses: azure/container-apps-deploy-action@v1
+        with:
+          acrName: ${{ secrets.ACR_NAME_SUB4 }}
+          containerAppName: ${{ env.ACA_NAME }}
+          resourceGroup: ${{ env.RESOURCE_GROUP }}
+          imageToDeploy: ${{ secrets.ACR_NAME_SUB4 }}/was:${{ github.sha }}
