@@ -16,7 +16,7 @@ permissions:
 env:
   RESOURCE_GROUP: "sub4-aca"
   ACA_NAME: "ca-sub4-aca"
-  ACR_NAME: "sub4aca-g5g0ezf8e5daejcw"
+  ACR_NAME: "sub4aca"
 
 jobs:
   login-and-deploy:
