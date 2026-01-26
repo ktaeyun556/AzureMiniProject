@@ -16,6 +16,7 @@ permissions:
 env:
   RESOURCE_GROUP: "sub4-aca"
   ACA_NAME: "ca-sub4-aca"
+  ACR_NAME: "sub4ACA"
 
 jobs:
   login-and-deploy:
@@ -60,7 +61,7 @@ jobs:
       - name: Deploy to Container Apps
         uses: azure/container-apps-deploy-action@v1
         with:
-          acrName: ${{ secrets.ACR_NAME }}
+          acrName: ${{ env.ACR_NAME }}
           containerAppName: ${{ env.ACA_NAME }}
           resourceGroup: ${{ env.RESOURCE_GROUP }}
           imageToDeploy: ${{ secrets.ACR_NAME }}/was:${{ github.sha }}
