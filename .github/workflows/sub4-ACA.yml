@@ -16,7 +16,7 @@ permissions:
 env:
   RESOURCE_GROUP: "sub4-aca"
   ACA_NAME: "ca-sub4-aca"
-  ACR_NAME: "sub4aca"
+  # ACR_NAME: "sub4aca-g5g0ezf8e5daejcw"
 
 jobs:
   login-and-deploy:
@@ -58,10 +58,20 @@ jobs:
           tags: ${{ secrets.ACR_NAME }}/was:${{ github.sha }}, ${{ secrets.ACR_NAME }}/was:latest
       
       # ACR 컨테이너 이미지를 사용해 컨테이너 앱 배포
-      - name: Deploy to Container Apps
-        uses: azure/container-apps-deploy-action@v1
+      # - name: Deploy to Container Apps
+      #   uses: azure/container-apps-deploy-action@v1
+      #   with:
+      #     acrName: ${{ env.ACR_NAME }}
+      #     containerAppName: ${{ env.ACA_NAME }}
+      #     resourceGroup: ${{ env.RESOURCE_GROUP }}
+      #     imageToDeploy: ${{ secrets.ACR_NAME }}/was:${{ github.sha }}
+
+      # ACR 컨테이너 이미지를 사용해 컨테이너 앱 배포(Azure CLI)
+      - name: Deploy to Container Apps (via CLI)
+        uses: azure/cli@v2
         with:
-          acrName: ${{ env.ACR_NAME }}
-          containerAppName: ${{ env.ACA_NAME }}
-          resourceGroup: ${{ env.RESOURCE_GROUP }}
-          imageToDeploy: ${{ secrets.ACR_NAME }}/was:${{ github.sha }}
+          inlineScript: |
+            az containerapp update \
+              --name ${{ env.ACA_NAME }} \
+              --resource-group ${{ env.RESOURCE_GROUP }} \
+              --image ${{ secrets.ACR_NAME }}/was:${{ github.sha }}
