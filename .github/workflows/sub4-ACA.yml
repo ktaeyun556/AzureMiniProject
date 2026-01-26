@@ -60,7 +60,7 @@ jobs:
       - name: Deploy to Container Apps
         uses: azure/container-apps-deploy-action@v1
         with:
-          acrName: ${{ secrets.ACR_NAME_SUB4 }}
+          acrName: ${{ secrets.ACR_NAME }}
           containerAppName: ${{ env.ACA_NAME }}
           resourceGroup: ${{ env.RESOURCE_GROUP }}
-          imageToDeploy: ${{ secrets.ACR_NAME_SUB4 }}/was:${{ github.sha }}
+          imageToDeploy: ${{ secrets.ACR_NAME }}/was:${{ github.sha }}
