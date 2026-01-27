@@ -278,7 +278,7 @@ public class BoardController {
   @ResponseBody
   @GetMapping(value = "/alive")
   public String alieveCheck()  throws Exception{
-    return "Alive";
+    return "Alive - 버전1";
   }
 
   /**
