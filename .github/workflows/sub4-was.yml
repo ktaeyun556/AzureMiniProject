@@ -34,7 +34,7 @@ jobs:
         with:
           registry: ${{ secrets.ACR_NAME }}
           username: ${{ secrets.AZURE_CLIENT_ID }}
-          password: ${{ secrets.AZURE_CLIENT_SECRET }} # 앱에 ACR 로그인에 사용할 토큰 필요(클라이언트 시크릿)
+          password: ${{ secrets.AZURE_CLIENT_SECRET_FOR_ACR_LOGIN }} # 앱에 ACR 로그인에 사용할 토큰 필요(클라이언트 시크릿)
       
       # 이미지 빌드 환경 준비
       - name: Set up QEMU
