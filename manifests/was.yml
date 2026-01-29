@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: spring-app
-          image: /was:457377aeb5851c417a11995712b353dea1234891
+          image: akshttps-hjbagshfecgsgdfs.azurecr.io/was:830c0d024160258d46b82c02c8c05e0b7e479739
           ports:
             - containerPort: 8090
           env:
