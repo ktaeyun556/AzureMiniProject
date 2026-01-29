@@ -32,7 +32,7 @@ jobs:
       - name: Login to ACR
         uses: docker/login-action@v3
         with:
-          registry: ${{ secrets.ACR_NAME_SUB4 }}
+          registry: ${{ secrets.ACR_NAME }}
           username: ${{ secrets.AZURE_CLIENT_ID }}
           password: ${{ secrets.AZURE_CLIENT_SECRET_FOR_ACR_LOGIN_SUB4 }} # 앱에 ACR 로그인에 사용할 토큰 필요(클라이언트 시크릿)
       
@@ -51,7 +51,7 @@ jobs:
           file: ./board-api/DockerfileARM
           push: true
           platforms: linux/arm64
-          tags: ${{ secrets.ACR_NAME_SUB4 }}/was:${{ github.sha }}, ${{ secrets.ACR_NAME_SUB4 }}/was:latest
+          tags: ${{ secrets.ACR_NAME }}/was:${{ github.sha }}, ${{ secrets.ACR_NAME }}/was:latest
       
       # k8s WAS 매니페스트 이미지 태그 수정
       - name: Update K8s WAS image tag
