@@ -2,7 +2,7 @@ import axios from 'axios'
 
 const instance = axios.create({
 	baseURL:
-		'https://ca-sub4-aca.wonderfulbay-7111bbcb.koreacentral.azurecontainerapps.io',
+		'https://api.tyaz.cloud',
 })
 
 instance.defaults.headers.post['Content-Type'] =
