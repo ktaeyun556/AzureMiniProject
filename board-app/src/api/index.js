@@ -1,8 +1,7 @@
 import axios from 'axios'
 
 const instance = axios.create({
-	baseURL:
-		'https://api.tyaz.cloud',
+	baseURL: 'https://api.tyaz.cloud',
 })
 
 instance.defaults.headers.post['Content-Type'] =
